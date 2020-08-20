@@ -14,6 +14,8 @@
   object-fit: contain;
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
 }
 
 .app__headerImage{
