@@ -24,10 +24,9 @@
 }
 
 .post__avatar {
-    float: left;
     margin: 10px;
+    float: left;
 }
 
 .post__username  {
-    float: left;
 }

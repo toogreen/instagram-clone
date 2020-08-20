@@ -65,7 +65,7 @@ function App() {
 
   useEffect(() => {
       // This is where the code runs
-      db.collection('posts').onSnapshot(snapshot => {
+      db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
         // every time a new post is added, this code fires up
         setPosts(snapshot.docs.map(doc => ({
           id: doc.id,
@@ -102,13 +102,6 @@ function App() {
 
   return (
     <div className="app">
-
-    {user?.displayName ? (
-      <ImageUpload username={user.displayName} />
-    ): (
-      <h3>Sorry you need to login first to upload</h3>
-    )}
-    
 
       <Modal  
         open={open}
@@ -190,20 +183,20 @@ function App() {
           src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
           alt=""
         />
+
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ): (
+          <div className="app__loginContainer">
+              <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
+
+
       </header>
 
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ): (
-        <div className="app__loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-        </div>
-      )}
 
-      
-
-      <h1>hello</h1>
 
       {
         posts.map(({id, post}) => (
@@ -215,6 +208,13 @@ function App() {
           />
         ))
       }
+
+      {/* This is where people can upload stuff */}
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ): (
+        <h3>Sorry you need to login first to upload</h3>
+      )}  
       
     </div>
   );
