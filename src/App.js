@@ -5,6 +5,7 @@ import { db, auth } from "./firebase";
 import {makeStyles } from '@material-ui/core/styles';
 import {Modal} from '@material-ui/core';
 import {Button, Input} from '@material-ui/core';
+import ImageUpload from "./ImageUpload"
 
 function getModalStyle() {
   const top = 50; 
@@ -101,6 +102,13 @@ function App() {
 
   return (
     <div className="app">
+
+    {user?.displayName ? (
+      <ImageUpload username={user.displayName} />
+    ): (
+      <h3>Sorry you need to login first to upload</h3>
+    )}
+    
 
       <Modal  
         open={open}
