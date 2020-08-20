@@ -1,5 +1,6 @@
 .post {
     background-color: white;
+    width: 100%;
     max-width: 500px;
     border: 1px solid lightgray;
     margin-bottom: 45px;
