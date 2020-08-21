@@ -180,7 +180,8 @@ function App() {
       <header className="app__header">
         <img 
           className="app__headerImage"
-          src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"
+          src="/img/instagreen.svg"
+          height="40px;"
           alt=""
         />
 
