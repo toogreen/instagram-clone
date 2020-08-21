@@ -20,18 +20,24 @@ function Post({username, caption, imageUrl}) {
  
             {/* Header -> avatar + username  */}
 
-
-            {(imageUrl.split('.').pop() === '.mp4*') ? (
-            <video>
-                <source src={imageUrl} type='video/mp4' />
-                Your browser does not support the video tag.
-            </video>
-            ): (
-                <img className="post__image" src={imageUrl} alt="" />
-            )}
             
-
-
+            { 
+            // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
+            (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
+            ? 
+                (
+                <video width="500" controls>
+                    <source src={imageUrl} type='video/mp4'></source>
+                    Your browser does not support the video tag.
+                </video>
+                )
+                : 
+                (
+                // If it is NOT a video, load it as an image:
+                <img className="post__image" src={imageUrl} alt="" />
+                )
+            }
+            
             <h4 className="post__text"><strong>{username}: </strong>{caption}</h4>
 
         </div>
