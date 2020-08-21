@@ -26,7 +26,7 @@ function Post({username, caption, imageUrl}) {
             (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
             ? 
                 (
-                <video width="500" controls>
+                <video width="500" controls="true" autoplay="true" loop="true" muted="true" playsinline="true">
                     <source src={imageUrl} type='video/mp4'></source>
                     Your browser does not support the video tag.
                 </video>
