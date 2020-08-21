@@ -66,3 +66,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### For this instagram-clone you will need to add:
+
+npm i firebase <br>
+npm install -g firebase-tools <br>
+npm install @material-ui/core
