@@ -30,4 +30,6 @@
 }
 
 .post__username  {
+    float: left;
+    margin-top: 18px;
 }
