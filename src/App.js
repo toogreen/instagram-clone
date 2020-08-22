@@ -215,9 +215,9 @@ function App() {
             ))
             }   
           </div>
-          <div className="app__postsRight">
+          <div className="app__postsRight no-mobile">
             <InstagramEmbed
-              url="https://instagr.am/p/Zw9o4/"
+              url="https://instagr.am/p/5F69EA3F/"
               maxWidth={320}
               hideCaption={false}
               containerTagName="div"

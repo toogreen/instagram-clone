@@ -14,7 +14,6 @@
 }
 
 .app__postsRight{
-  display: none;
   margin-left: 20px;
 }
 
@@ -39,3 +38,13 @@
   flex-direction: column;
 }
 
+@media (max-width: 768px) {
+  .no-mobile {
+    display: none;
+  }
+
+  .app__posts{
+    /* padding-left: 0px;
+    padding-right: 0px; */
+  }
+}

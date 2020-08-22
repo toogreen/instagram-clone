@@ -3,7 +3,7 @@
     width: 100%;
     max-width: 500px;
     border: 1px solid lightgray;
-    margin-bottom: 45px;
+    margin-bottom: 30px;
 }
 
 .post__image {
@@ -20,7 +20,7 @@
 
 .post__header {
     display: flex;
-    padding: 20px;
+    padding: 10px;
     align-items: center;
 }
 
