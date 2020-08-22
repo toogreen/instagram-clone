@@ -112,6 +112,7 @@ function App() {
             <center>
               <img 
                 className="app__headerImage"
+                height="40px;"
                 src="img/instagreen.svg"
                 alt=""
               />
@@ -153,6 +154,7 @@ function App() {
               <img 
                 className="app__headerImage"
                 src="img/instagreen.svg"
+                height="40px;"
                 alt=""
               />
             </center>
