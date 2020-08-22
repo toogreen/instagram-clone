@@ -75,7 +75,7 @@ function Post({postId, username, user, caption, imageUrl}) {
 
             <div className="post__comments">
                 {comments.map((comment) => (
-                    <p className="post__comment"><strong>{comment.username}</strong> {comment.text} </p>
+                    <p className="post__comment"><strong>{comment.username}: </strong> {comment.text} </p>
                 ))}
             </div>
 
