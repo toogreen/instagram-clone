@@ -54,6 +54,10 @@ function ImageUpload({username}) {
                         setProgress(0);
                         setCaption("");
                         setImage(null);
+
+                        // Scroll back to top
+                        document.body.scrollTop = 0; // For Safari
+                        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                     })
             }
         )

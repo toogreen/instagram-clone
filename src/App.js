@@ -6,6 +6,8 @@ import {makeStyles } from '@material-ui/core/styles';
 import {Modal} from '@material-ui/core';
 import {Button, Input} from '@material-ui/core';
 import ImageUpload from "./ImageUpload"
+import InstagramEmbed from 'react-instagram-embed';
+
 
 function getModalStyle() {
   const top = 50; 
@@ -113,7 +115,7 @@ function App() {
               <img 
                 className="app__headerImage"
                 height="40px;"
-                src="img/instagreen.svg"
+                src="https://toogreen.ca/instagreen/img/instagreen.svg"
                 alt=""
               />
             </center>
@@ -153,7 +155,7 @@ function App() {
             <center>
               <img 
                 className="app__headerImage"
-                src="img/instagreen.svg"
+                src="https://toogreen.ca/instagreen/img/instagreen.svg"
                 height="40px;"
                 alt=""
               />
@@ -182,7 +184,7 @@ function App() {
       <header className="app__header">
         <img 
           className="app__headerImage"
-          src="img/instagreen.svg"
+          src="https://toogreen.ca/instagreen/img/instagreen.svg"
           height="40px;"
           alt=""
         />
@@ -196,21 +198,51 @@ function App() {
           </div>
         )}
 
-
       </header>
 
+        <div className="app__posts">
+          <div className="app__postsLeft">
+            {
+            posts.map(({id, post}) => (
+              <Post 
+                  key={id}
+                  username={post.username}
+                  caption={post.caption}
+                  imageUrl={post.imageUrl}
+              />
+            ))
+            }   
+          </div>
+          <div className="app__postsRight">
+            <InstagramEmbed
+              url="https://www.instagram.com/tougrine/"
+              maxWidth={320}
+              hideCaption={false}
+              containerTagName="div"
+              protocol=""
+              injectScript
+              onLoading={() => {}}
+              onSuccess={() => {}}
+              onAfterRender={() => {}}
+              onFailure={() => {}}
+            />
+
+          </div>
+       
 
 
-      {
-        posts.map(({id, post}) => (
-          <Post 
-              key={id}
-              username={post.username}
-              caption={post.caption}
-              imageUrl={post.imageUrl}
-          />
-        ))
-      }
+
+
+
+        </div>
+
+
+
+
+
+
+
+
 
       {/* This is where people can upload stuff */}
       {user?.displayName ? (
