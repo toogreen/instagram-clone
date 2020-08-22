@@ -4,9 +4,6 @@ import Avatar from "@material-ui/core/Avatar"
 
 function Post({username, caption, imageUrl}) {
     
-        //alert(imageUrl.split('.').pop())
-        
-
     return (
         <div className="post">
             <div className="post__header">
