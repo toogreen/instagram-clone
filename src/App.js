@@ -180,7 +180,7 @@ function App() {
       <header className="app__header">
         <img 
           className="app__headerImage"
-          src="/img/instagreen.svg"
+          src="img/instagreen.svg"
           height="40px;"
           alt=""
         />
