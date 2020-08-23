@@ -44,6 +44,7 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openImageUpload, setOpenImageUpload] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -244,21 +245,28 @@ function App() {
 
         </div>
 
-
-
-
-
-
-
-
+      <footer className="footer">
 
       {/* This is where people can upload stuff */}
       {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ): (
-        <center><h3>Sorry you need to login first to upload</h3></center>
-      )}  
 
+          <div>
+            <Modal  
+              open={openImageUpload}
+              onClose={() => setOpenImageUpload(false)}
+            >
+              <ImageUpload username={user.displayName} closemodal={setOpenImageUpload} />
+            </Modal>
+
+            <Button onClick={() => setOpenImageUpload(true)}>
+            <img className="app__add-postImg" src="/img/add-post.svg" alt='plus icon to add posts'/>
+            </Button>          
+          
+          </div>
+          ): (
+          <center><h3>Sorry you need to login first to upload</h3></center>
+          )}  
+      </footer>
     </div>
   );
 }

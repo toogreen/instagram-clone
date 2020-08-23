@@ -4,7 +4,7 @@ import firebase from "firebase"
 import { storage, db } from "./firebase"
 import './ImageUpload.css'
 
-function ImageUpload({username}) {
+function ImageUpload({username, closemodal}) {
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
     const [caption, setCaption] = useState('');
@@ -54,6 +54,7 @@ function ImageUpload({username}) {
                         setProgress(0);
                         setCaption("");
                         setImage(null);
+                        closemodal(false);
 
                         // Scroll back to top
                         document.body.scrollTop = 0; // For Safari
