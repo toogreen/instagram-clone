@@ -7,11 +7,18 @@ import {Modal} from '@material-ui/core';
 import {Button, Input} from '@material-ui/core';
 import ImageUpload from "./ImageUpload"
 import InstagramEmbed from 'react-instagram-embed';
+import Avatar from "@material-ui/core/Avatar"
 
 
 function backToTop(){
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+function showMyPosts() {
+
+  // Insert code here to only display posts from the logged in user
+    
 }
 
 function getModalStyle() {
@@ -237,18 +244,12 @@ function App() {
             />
 
           </div>
-       
-
-
-
-
-
         </div>
 
       <footer className="footer">
 
-      {/* This is where people can upload stuff */}
-      {user?.displayName ? (
+        {/* This is where people can upload stuff */}
+        {user?.displayName ? (
 
           <div>
             <Modal  
@@ -257,15 +258,31 @@ function App() {
             >
               <ImageUpload username={user.displayName} closemodal={setOpenImageUpload} />
             </Modal>
+            
 
-            <Button onClick={() => setOpenImageUpload(true)}>
-            <img className="app__add-postImg" src="https://toogreen.ca/instagreen/img/add-post.svg" alt='plus icon to add posts'/>
-            </Button>          
-          
+            <div className="footer__icons">
+              <div className="footer__left">
+                <img onClick={backToTop} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
+              </div>
+
+              <div className="footer__middle">
+                <img onClick={() => setOpenImageUpload(true)} className="app__add-postImg" src="https://toogreen.ca/instagreen/img/add-post.svg" alt='plus icon to add posts'/>
+              </div>
+
+              <div className="footer__right">
+                  <Avatar 
+                      onClick={showMyPosts(username)}
+                      className="footer__avatar"
+                      alt={username}
+                      src="https://toogreen.ca/instagreen/static/images/avatar/1.jpg"
+                  />  
+              </div>
+            </div>
+
           </div>
-          ): (
+        ): (
           <center><h3>Sorry you need to login first to upload</h3></center>
-          )}  
+        )}  
       </footer>
     </div>
   );

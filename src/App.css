@@ -40,11 +40,13 @@
 }
 
 footer{
+  grid-template-columns: 0 1fr 0;
   position: sticky;
   bottom: 0;
   width: 100%;
   border-top: 1px solid lightgray;
   height: 60px;
+  max-height: 60px;
   background-color: white;
   text-align: center;
   justify-content: center;
@@ -55,9 +57,50 @@ footer h3{
   margin-top: 20px;
 }
 
-.app__add-postImg{
-  height: 30px;
+.footer__icons{
+  display: flex;
 }
+
+.app__add-postImg, .app__home{
+  
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.footer__left{
+  flex: 0;
+}
+
+  .app__home{
+    height: 30px;
+    padding-top: 10px;
+    padding-left: 20px;
+    float: left;
+  }
+
+.footer__middle{
+  flex: 1;
+}
+
+  .app__add-postImg{
+    height: 35px;
+    padding-top: 10px;
+  }
+
+  .footer__right{
+    flex: 0;
+  }
+
+.footer__avatar{
+  color: #008000;
+  margin-top: 10px;
+  margin-right: 10px;
+  max-height: 35px;
+  max-width: 35px;
+  cursor: pointer;
+}
+
+
 
 @media (max-width: 768px) {
   .no-mobile {
