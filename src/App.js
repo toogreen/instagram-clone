@@ -259,7 +259,7 @@ function App() {
             </Modal>
 
             <Button onClick={() => setOpenImageUpload(true)}>
-            <img className="app__add-postImg" src="/img/add-post.svg" alt='plus icon to add posts'/>
+            <img className="app__add-postImg" src="https://toogreen.ca/instagreen/img/add-post.svg" alt='plus icon to add posts'/>
             </Button>          
           
           </div>
