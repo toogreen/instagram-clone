@@ -9,6 +9,11 @@ import ImageUpload from "./ImageUpload"
 import InstagramEmbed from 'react-instagram-embed';
 
 
+function backToTop(){
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
 function getModalStyle() {
   const top = 50; 
   const left = 50;
@@ -187,6 +192,7 @@ function App() {
           src="https://toogreen.ca/instagreen/img/instagreen.svg"
           height="40px;"
           alt=""
+          onClick={backToTop}
         />
 
         {user ? (
@@ -250,7 +256,7 @@ function App() {
       {user?.displayName ? (
         <ImageUpload username={user.displayName} />
       ): (
-        <h3>Sorry you need to login first to upload</h3>
+        <center><h3>Sorry you need to login first to upload</h3></center>
       )}  
 
     </div>
