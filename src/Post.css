@@ -65,4 +65,5 @@
 
 .post__thumb{
     width: 100%;
+    cursor: pointer;
   }

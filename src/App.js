@@ -53,6 +53,8 @@ function App() {
   const [email, setEmail] = useState('');
   const [user, setUser] = useState(null);
   const [viewmine, setViewMine] = useState(false);
+  const [viewsinglepost, setViewSinglePost] = useState(false);
+  const [singlepostid, setSinglePostId] = useState("bUsaVQYrGk0KJoRlWnKk");
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
@@ -197,7 +199,7 @@ function App() {
           src="https://toogreen.ca/instagreen/img/instagreen.svg"
           height="40px;"
           alt=""
-          onClick={backToTop}
+          // onClick={backToTop}
         />
 
         {user ? (
@@ -222,6 +224,8 @@ function App() {
              {
               posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
                 
+                // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
+                <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); backToTop(); }}>
                   <PostThumb 
                       key={id}
                       postId={id}
@@ -230,12 +234,31 @@ function App() {
                       caption={post.caption}
                       imageUrl={post.imageUrl}
                   />
-                
+                </div>
+
                ))}
-            </div>
-          
+              </div>
+                        
+            ) : viewsinglepost ? ( 
+
+              // If a single post was selected
+        
+              posts.filter(({id, post}) => id === singlepostid).map(({id, post}) => (
+                <Post 
+                    key={id}
+                    postId={id}
+                    user={user}
+                    username={post.username}
+                    caption={post.caption}
+                    imageUrl={post.imageUrl}
+                />  
+                                             
+              ))
+
             ) : (
-              // Otherwise, show all the posts as usual
+
+              // Else if no posts were selected, simply display all posts as usual
+            
               posts.map(({id, post}) => (
                 <Post 
                     key={id}
@@ -244,8 +267,9 @@ function App() {
                     username={post.username}
                     caption={post.caption}
                     imageUrl={post.imageUrl}
-                />            
-            ))  
+                />  
+              ))
+
             )
             }   
           </div>
@@ -282,7 +306,7 @@ function App() {
 
             <div className="footer__icons">
               <div className="footer__left">
-                <img onClick={() => {setViewMine(false); backToTop();}} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
+                <img onClick={() => {setViewMine(false); setViewSinglePost(false); backToTop();}} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
               </div>
 
               <div className="footer__middle">
@@ -291,7 +315,7 @@ function App() {
 
               <div className="footer__right">
                   <Avatar 
-                      onClick={()=> setViewMine(true)}
+                      onClick={()=> {setViewMine(true); backToTop();}}
                       className="footer__avatar"
                       alt={username}
                       src="https://toogreen.ca/instagreen/static/images/avatar/1.jpg"

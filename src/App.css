@@ -31,7 +31,7 @@
 
 .app__headerImage{
   object-fit: contain;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .app__signup{
