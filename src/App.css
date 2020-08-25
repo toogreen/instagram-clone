@@ -101,6 +101,12 @@ footer h3{
 }
 
 
+.post__thumbs{
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: auto auto auto;
+}
+
 
 @media (max-width: 768px) {
   .no-mobile {

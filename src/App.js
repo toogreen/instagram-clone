@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import './App.css';
 import Post from "./Post";
+import PostThumb from "./PostThumb";
 import { db, auth } from "./firebase";
 import {makeStyles } from '@material-ui/core/styles';
 import {Modal} from '@material-ui/core';
@@ -13,12 +14,6 @@ import Avatar from "@material-ui/core/Avatar"
 function backToTop(){
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
-
-function showMyPosts() {
-
-  // Insert code here to only display posts from the logged in user
-    
 }
 
 function getModalStyle() {
@@ -219,21 +214,26 @@ function App() {
         <div className="app__posts">
           <div className="app__postsLeft">
             {
-
             // If "View my own posts button was clicked AND user is logged in"
-            (viewmine && user)  ? (  
-            
-            // then this will fetch only his own posts
-            posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
-              <Post 
-                  key={id}
-                  postId={id}
-                  user={user}
-                  username={post.username}
-                  caption={post.caption}
-                  imageUrl={post.imageUrl}
-              />
-            ))
+            (viewmine && user)  ? (
+              
+              <div className="post__thumbs">
+              
+             {
+              posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
+                
+                  <PostThumb 
+                      key={id}
+                      postId={id}
+                      user={user}
+                      username={post.username}
+                      caption={post.caption}
+                      imageUrl={post.imageUrl}
+                  />
+                
+               ))}
+            </div>
+          
             ) : (
               // Otherwise, show all the posts as usual
               posts.map(({id, post}) => (
