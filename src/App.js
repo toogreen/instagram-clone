@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import './App.css';
 import Post from "./Post";
 import { db, auth } from "./firebase";
@@ -57,6 +57,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [user, setUser] = useState(null);
+  const [viewmine, setViewMine] = useState(false);
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
@@ -110,10 +111,11 @@ function App() {
     auth
       .signInWithEmailAndPassword(email, password)
       .catch((error) => alert(error.message));
-
+    
     // Close modal
     setOpenSignIn(false);
   }
+
 
   return (
     <div className="app">
@@ -217,7 +219,12 @@ function App() {
         <div className="app__posts">
           <div className="app__postsLeft">
             {
-            posts.map(({id, post}) => (
+
+            // If "View my own posts button was clicked AND user is logged in"
+            (viewmine && user)  ? (  
+            
+            // then this will fetch only his own posts
+            posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
               <Post 
                   key={id}
                   postId={id}
@@ -227,6 +234,19 @@ function App() {
                   imageUrl={post.imageUrl}
               />
             ))
+            ) : (
+              // Otherwise, show all the posts as usual
+              posts.map(({id, post}) => (
+                <Post 
+                    key={id}
+                    postId={id}
+                    user={user}
+                    username={post.username}
+                    caption={post.caption}
+                    imageUrl={post.imageUrl}
+                />            
+            ))  
+            )
             }   
           </div>
           <div className="app__postsRight no-mobile">
@@ -262,7 +282,7 @@ function App() {
 
             <div className="footer__icons">
               <div className="footer__left">
-                <img onClick={backToTop} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
+                <img onClick={() => {setViewMine(false); backToTop();}} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
               </div>
 
               <div className="footer__middle">
@@ -271,7 +291,7 @@ function App() {
 
               <div className="footer__right">
                   <Avatar 
-                      onClick={showMyPosts(username)}
+                      onClick={()=> setViewMine(true)}
                       className="footer__avatar"
                       alt={username}
                       src="https://toogreen.ca/instagreen/static/images/avatar/1.jpg"
