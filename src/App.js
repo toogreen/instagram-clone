@@ -114,6 +114,13 @@ function App() {
     setOpenSignIn(false);
   }
 
+  function home() {
+    setViewMine(false); 
+    setViewTheirs(false); 
+    setViewWhich(''); 
+    setViewSinglePost(false); 
+    backToTop();    
+  }
 
   return (
     <div className="app">
@@ -335,7 +342,7 @@ function App() {
 
             <div className="footer__icons">
               <div className="footer__left">
-                <img onClick={() => {setViewMine(false); setViewTheirs(false); setViewWhich(''); setViewSinglePost(false); backToTop();}} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
+                <img onClick={home} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
               </div>
 
               <div className="footer__middle">
@@ -354,7 +361,18 @@ function App() {
 
           </div>
         ): (
-          <center><h3>Sorry you need to login first to upload</h3></center>
+          <div className="footer__icons">
+              <div className="footer__left">
+                <img onClick={home} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
+              </div>
+              <div className="footer__middle">
+              <center><h4>Please login first to upload or comment</h4></center>   
+              </div>
+              <div className="footer__right">
+                  &nbsp;
+              </div>                       
+          </div>
+          
         )}  
       </footer>
     </div>

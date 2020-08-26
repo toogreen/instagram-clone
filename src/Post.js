@@ -39,9 +39,16 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich}
             
     }
 
+    function backtotop(){
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+
+    // Function to view others' posts
     function viewtheirstuff() {
         viewtheirs(true); 
         viewwhich(username);
+        backtotop();
     }
      
     return (
@@ -80,7 +87,7 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich}
 
             <div className="post__comments">
                 {comments.map((comment) => (
-                    <p className="post__comment"><strong onClick={()=> {viewtheirs(true); viewwhich(comment.username)}}>{comment.username}: </strong> {comment.text} </p>
+                    <p className="post__comment"><strong onClick={()=> {viewtheirs(true); viewwhich(comment.username); backtotop();}}>{comment.username}: </strong> {comment.text} </p>
                 ))}
             </div>
 
