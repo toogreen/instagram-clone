@@ -18,6 +18,10 @@
     padding: 20px;
 }
 
+.post__text > strong {
+    cursor: pointer;
+}
+
 .post__header {
     display: flex;
     padding: 10px;

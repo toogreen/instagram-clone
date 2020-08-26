@@ -76,7 +76,7 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich}
             }
 
             
-            <h4 className="post__text"><strong>{username}: </strong>{caption}</h4>
+            <h4 className="post__text"><strong onClick={viewtheirstuff}>{username}: </strong>{caption}</h4>
 
             <div className="post__comments">
                 {comments.map((comment) => (
