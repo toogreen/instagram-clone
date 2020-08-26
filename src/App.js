@@ -100,6 +100,9 @@ function App() {
     })
     .catch((error) => alert(error.message));
 
+    // Set user so that footer changes accordingly
+    
+
     // Close modal
     setOpen(false);
   }
@@ -329,7 +332,8 @@ function App() {
       <footer className="footer">
 
         {/* This is where people can upload stuff */}
-        {user?.displayName ? (
+        {/* below line used to be user?.displayName ? (  - but it was giving issues so i changed it */}
+        {user ? (
 
           <div>
             <Modal  
