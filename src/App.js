@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import './App.css';
-import Post from "./Post";
+import Post, {viewtheirs, viewwhich} from "./Post";
 import PostThumb from "./PostThumb";
 import { db, auth } from "./firebase";
 import {makeStyles } from '@material-ui/core/styles';
@@ -9,7 +9,6 @@ import {Button, Input} from '@material-ui/core';
 import ImageUpload from "./ImageUpload"
 import InstagramEmbed from 'react-instagram-embed';
 import Avatar from "@material-ui/core/Avatar"
-
 
 function backToTop(){
   document.body.scrollTop = 0; // For Safari
@@ -53,6 +52,8 @@ function App() {
   const [email, setEmail] = useState('');
   const [user, setUser] = useState(null);
   const [viewmine, setViewMine] = useState(false);
+  const [viewtheirs, setViewTheirs] = useState(false);
+  const [viewwhich, setViewWhich] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState("bUsaVQYrGk0KJoRlWnKk");
 
@@ -222,6 +223,7 @@ function App() {
               <div className="post__thumbs">
               
              {
+
               posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
                 
                 // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
@@ -238,7 +240,32 @@ function App() {
 
                ))}
               </div>
-                        
+
+
+              ) : (viewtheirs)  ? ( // If we want to see other people's list of posts
+                              
+                  <div className="post__thumbs">
+                  
+                {
+
+                  posts.filter(({id, post}) => post.username === viewwhich).map(({id, post}) => (
+                    
+                    // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
+                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewTheirs(false); backToTop(); }}>
+                      <PostThumb 
+                          key={id}
+                          postId={id}
+                          user={user}
+                          username={post.username}
+                          caption={post.caption}
+                          imageUrl={post.imageUrl}
+                      />
+                    </div>
+
+                  ))}
+                  </div>
+                          
+
             ) : viewsinglepost ? ( 
 
               // If a single post was selected
@@ -257,7 +284,7 @@ function App() {
 
             ) : (
 
-              // Else if no posts were selected, simply display all posts as usual
+              // Else if no posts were selected at all, simply default to display all posts as usual
             
               posts.map(({id, post}) => (
                 <Post 
@@ -267,6 +294,8 @@ function App() {
                     username={post.username}
                     caption={post.caption}
                     imageUrl={post.imageUrl}
+                    viewtheirs={setViewTheirs}
+                    viewwhich={setViewWhich}
                 />  
               ))
 
@@ -306,7 +335,7 @@ function App() {
 
             <div className="footer__icons">
               <div className="footer__left">
-                <img onClick={() => {setViewMine(false); setViewSinglePost(false); backToTop();}} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
+                <img onClick={() => {setViewMine(false); setViewTheirs(false); setViewWhich(''); setViewSinglePost(false); backToTop();}} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
               </div>
 
               <div className="footer__middle">

@@ -27,10 +27,11 @@
 .post__avatar {
     margin: 10px;
     float: left;
+    cursor: pointer;
 }
 
 .post__username  {
-    /* margin-top: 18px; */
+    cursor: pointer;
 }
 
 .post__commentBox {
@@ -46,6 +47,10 @@
 
 .post__comment{
     margin-bottom: 10px;
+}
+
+.post__comment > strong {
+    cursor: pointer;
 }
 
 .post__input{
@@ -66,4 +71,4 @@
 .post__thumb{
     width: 100%;
     cursor: pointer;
-  }
+}

@@ -4,7 +4,8 @@ import Avatar from "@material-ui/core/Avatar"
 import { db } from './firebase';
 import firebase from 'firebase';
 
-function Post({postId, username, user, caption, imageUrl}) {
+
+function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
 
@@ -37,6 +38,11 @@ function Post({postId, username, user, caption, imageUrl}) {
         setComment('');
             
     }
+
+    function viewtheirstuff() {
+        viewtheirs(true); 
+        viewwhich(username);
+    }
      
     return (
         <div className="post">
@@ -45,15 +51,13 @@ function Post({postId, username, user, caption, imageUrl}) {
                     className="post__avatar"
                     alt={username}
                     src="/static/images/avatar/1.jpg"
+                    onClick={viewtheirstuff}
                 />
-                <div className="post__username">
+                <div className="post__username" onClick={viewtheirstuff}>
                     <h3>{username}</h3>
                 </div>
             </div>
- 
-            {/* Header -> avatar + username  */}
 
-            
             { 
             // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
             (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
@@ -70,12 +74,13 @@ function Post({postId, username, user, caption, imageUrl}) {
                 <img className="post__image" src={imageUrl} alt="" />
                 )
             }
+
             
             <h4 className="post__text"><strong>{username}: </strong>{caption}</h4>
 
             <div className="post__comments">
                 {comments.map((comment) => (
-                    <p className="post__comment"><strong>{comment.username}: </strong> {comment.text} </p>
+                    <p className="post__comment"><strong onClick={()=> {viewtheirs(true); viewwhich(comment.username)}}>{comment.username}: </strong> {comment.text} </p>
                 ))}
             </div>
 
