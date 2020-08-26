@@ -65,24 +65,27 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich}
                 </div>
             </div>
 
-            { 
-            // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
-            (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
-            ? 
-                (
-                <video width="100%" max-width="500" controls="true" autoplay="true" loop="true" muted="true" playsinline="true">
-                    <source src={imageUrl} type='video/mp4'></source>
-                    Your browser does not support the video tag.
-                </video>
-                )
-                : 
-                (
-                // If it is NOT a video, load it as an image:
-                <img className="post__image" src={imageUrl} alt="" />
-                )
-            }
+            <div className="post__imgcontainer">
 
-            
+                { 
+                // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
+                (imageUrl.includes(".mp4")) || (imageUrl.includes(".MP4")) || (imageUrl.includes(".mov")) || (imageUrl.includes(".MOV")) 
+                ? 
+                    (
+                    <video width="100%" max-width="500" controls="true" autoplay="true" loop="true" muted="true" playsinline="true">
+                        <source src={imageUrl} type='video/mp4'></source>
+                        Your browser does not support the video tag.
+                    </video>
+                    )
+                    : 
+                    (
+                    // If it is NOT a video, load it as an image:
+                    <img className="post__image" src={imageUrl} alt="" />
+                    )
+                }
+
+            </div>            
+
             <h4 className="post__text"><strong onClick={viewtheirstuff}>{username}: </strong>{caption}</h4>
 
             <div className="post__comments">
