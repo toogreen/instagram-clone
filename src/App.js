@@ -8,7 +8,8 @@ import {Modal} from '@material-ui/core';
 import {Button, Input} from '@material-ui/core';
 import ImageUpload from "./ImageUpload"
 import InstagramEmbed from 'react-instagram-embed';
-import Avatar from "@material-ui/core/Avatar"
+import Avatar from "@material-ui/core/Avatar";
+import LazyLoad from "react-lazyload";
 
 function backToTop(){
   document.body.scrollTop = 0; // For Safari
@@ -37,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Spinner = () => (
+  <div className="post loading">
+    <h5>Loading...</h5>
+  </div>
+);
 
 function App() {
 
@@ -235,17 +241,26 @@ function App() {
               posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
                 
                 // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-                <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
-                  <PostThumb 
-                      key={id}
-                      postId={id}
-                      user={user}
-                      username={post.username}
-                      caption={post.caption}
-                      imageUrl={post.imageUrl}
+                
+                <LazyLoad 
+                  key={id}
+                  height={100}
+                  offset={[-100, 100]}
+                  placeholder={<Spinner />}
+                  >
+                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
+                      <PostThumb 
+                          key={id}
+                          postId={id}
+                          user={user}
+                          username={post.username}
+                          caption={post.caption}
+                          imageUrl={post.imageUrl}
 
-                  />
-                </div>
+                      />
+                    </div>
+                  </LazyLoad>
+
 
                ))}
               </div>
@@ -259,17 +274,25 @@ function App() {
 
                   posts.filter(({id, post}) => post.username === viewwhichuser).map(({id, post}) => (
                     
+                    <LazyLoad 
+                    key={id}
+                    height={100}
+                    offset={[-100, 100]}
+                    placeholder={<Spinner />}
+                    >
+                      <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
+                        <PostThumb 
+                            key={id}
+                            postId={id}
+                            user={user}
+                            username={post.username}
+                            caption={post.caption}
+                            imageUrl={post.imageUrl}
+                        />
+                      </div>
+                    </LazyLoad> 
                     // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
-                      <PostThumb 
-                          key={id}
-                          postId={id}
-                          user={user}
-                          username={post.username}
-                          caption={post.caption}
-                          imageUrl={post.imageUrl}
-                      />
-                    </div>
+
 
                   ))}
                   </div>
@@ -289,8 +312,7 @@ function App() {
                     imageUrl={post.imageUrl}
                     viewwhichuser={setViewWhichUser}
                     viewsinglepost={setViewSinglePost}
-                />  
-                                             
+                />                             
               ))
                   
             ) : (
@@ -298,16 +320,25 @@ function App() {
               // Else if no posts were selected at all, simply default to display all posts as usual
             
               posts.map(({id, post}) => (
-                <Post 
-                    key={id}
-                    postId={id}
-                    user={user}
-                    username={post.username}
-                    caption={post.caption}
-                    imageUrl={post.imageUrl}
-                    viewwhichuser={setViewWhichUser}
-                    viewsinglepost={setViewSinglePost}
-                />  
+
+                <LazyLoad 
+                  key={id}
+                  height={100}
+                  offset={[-100, 100]}
+                  placeholder={<Spinner />}
+                  >
+                    <Post 
+                        key={id}
+                        postId={id}
+                        user={user}
+                        username={post.username}
+                        caption={post.caption}
+                        imageUrl={post.imageUrl}
+                        viewwhichuser={setViewWhichUser}
+                        viewsinglepost={setViewSinglePost}
+                    />  
+                  </LazyLoad>
+
               ))
 
             )
