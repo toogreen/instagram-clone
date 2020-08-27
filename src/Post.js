@@ -105,9 +105,9 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                     <h3>{username} </h3>
                 </div>
                 {
-                    (user && username === auth.currentUser.displayName) 
+                    user && username === auth.currentUser.displayName
                     &&
-                    <div className="delete__Post" onClick={deletePost.bind(this, postId)}>DELETE this post</div>
+                    <h5 className="delete__Post" onClick={deletePost.bind(this, postId)}>DELETE this post</h5>
                 }
                 
             </div>
@@ -142,9 +142,13 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                         <strong onClick={viewtheirstuff.bind(this, comment.username)}>
                             {comment.username}: 
                         </strong> {comment.text} 
-                        <span className="delete__CommentButton" onClick={deleteComment.bind(this, comment.ref)}>
-                            Delete this comment
-                        </span>
+                        {
+                            user && comment.username === auth.currentUser.displayName 
+                            &&
+                            <h5 className="delete__CommentButton" onClick={deleteComment.bind(this, comment)}>
+                                DELETE
+                            </h5>
+                        }
                     </p>
                     
                 ))}
