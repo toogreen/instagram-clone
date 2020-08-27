@@ -78,6 +78,9 @@
 }
 
 .delete__Post, .delete__CommentButton{
+    position: relative;
+    top: 0px;
+    right: 20px;
     float: right;
     cursor: pointer;
     padding-right: 20px;
