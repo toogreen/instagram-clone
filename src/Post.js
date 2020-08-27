@@ -8,6 +8,7 @@ import firebase from 'firebase';
 function Post({postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
+    const [commentId, setCommentId] = useState([]);
 
 
     // What follows is for comments under a post
@@ -39,6 +40,8 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
         setComment('');
             
     }
+
+    
 
     function deletePost(postId) {
         // event.preventDefault();
@@ -72,6 +75,8 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     function deleteComment(commentId) {
         // event.preventDefault();
         
+        
+
         alert(commentId);
         
 /*         db.collection("posts").doc(postId).collection("comments").doc(commentId).delete().then(function() {
@@ -145,7 +150,8 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                         {
                             user && comment.username === auth.currentUser.displayName 
                             &&
-                            <h5 className="delete__CommentButton" onClick={deleteComment.bind(this, comment)}>
+                            // commentId = Object.assign({ uid: doc.id }, doc.data())
+                            <h5 className="delete__CommentButton" onClick={deleteComment.bind(this, JSON.stringify(comment))}>
                                 DELETE
                             </h5>
                         }

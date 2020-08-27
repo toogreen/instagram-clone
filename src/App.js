@@ -60,7 +60,7 @@ function App() {
   const [viewmine, setViewMine] = useState(false);
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
-  const [singlepostid, setSinglePostId] = useState("bUsaVQYrGk0KJoRlWnKk");
+  const [singlepostid, setSinglePostId] = useState('');
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {

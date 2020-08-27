@@ -85,6 +85,10 @@
     color: red;
 }
 
+.delete__CommentButton{
+    display: none;
+}
+
 /* .post__image{
 }
 
