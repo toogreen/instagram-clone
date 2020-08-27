@@ -5,7 +5,7 @@ import { db } from './firebase';
 import firebase from 'firebase';
 
 
-function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich, viewsinglepost}) {
+function Post({postId, username, user, caption, imageUrl, viewwhichuser}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
 
@@ -46,9 +46,8 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich,
     }
 
     // Function to view others' posts
-    function viewtheirstuff(userselected) {
-        viewtheirs(true); 
-        viewwhich(userselected);
+    function viewtheirstuff(userselected) { 
+        viewwhichuser(userselected);
         backtotop();
     }
      
@@ -59,9 +58,9 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich,
                     className="post__avatar"
                     alt={username}
                     src="/static/images/avatar/1.jpg"
-                    onClick={viewtheirs && viewtheirstuff.bind(this, username) }
+                    onClick={viewtheirstuff.bind(this, username) }
                 />
-                <div className="post__username" onClick={viewtheirs && viewtheirstuff.bind(this, username) }>
+                <div className="post__username" onClick={viewtheirstuff.bind(this, username)}>
                     <h3>{username}</h3>
                 </div>
             </div>
@@ -87,11 +86,11 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich,
 
             </div>            
 
-            <h4 className="post__text"><strong onClick={viewtheirs && viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}</h4>
+            <h4 className="post__text"><strong onClick={viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}</h4>
 
             <div className="post__comments">
                 {comments.map((comment) => (
-                    <p className="post__comment"><strong onClick={viewtheirs && viewtheirstuff.bind(this, comment.username)}>{comment.username}: </strong> {comment.text} </p>
+                    <p className="post__comment"><strong onClick={viewtheirstuff.bind(this, comment.username)}>{comment.username}: </strong> {comment.text} </p>
                 ))}
             </div>
 

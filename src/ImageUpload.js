@@ -4,7 +4,7 @@ import firebase from "firebase"
 import { storage, db } from "./firebase"
 import './ImageUpload.css'
 
-function ImageUpload({username, closemodal}) {
+function ImageUpload({username, closemodal, viewwhichuser, viewsinglepost}) {
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
     const [caption, setCaption] = useState('');
@@ -56,9 +56,11 @@ function ImageUpload({username, closemodal}) {
                         setImage(null);
                         closemodal(false);
 
-                        // Scroll back to top
+                        // Scroll back to top and reset other states so that it goes back to default list
                         document.body.scrollTop = 0; // For Safari
                         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+                        viewwhichuser('');
+                        viewsinglepost(false);
                     })
             }
         )

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import './App.css';
-import Post, {viewtheirs, viewwhich} from "./Post";
+import Post, {viewwhichuser} from "./Post";
 import PostThumb from "./PostThumb";
 import { db, auth } from "./firebase";
 import {makeStyles } from '@material-ui/core/styles';
@@ -52,8 +52,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [user, setUser] = useState(null);
   const [viewmine, setViewMine] = useState(false);
-  const [viewtheirs, setViewTheirs] = useState(false);
-  const [viewwhich, setViewWhich] = useState('');
+  const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState("bUsaVQYrGk0KJoRlWnKk");
 
@@ -119,8 +118,7 @@ function App() {
 
   function home() {
     setViewMine(false); 
-    setViewTheirs(false); 
-    setViewWhich(''); 
+    setViewWhichUser(''); 
     setViewSinglePost(false); 
     backToTop();    
   }
@@ -237,7 +235,7 @@ function App() {
               posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
                 
                 // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-                <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewTheirs(false); backToTop(); }}>
+                <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
                   <PostThumb 
                       key={id}
                       postId={id}
@@ -253,16 +251,16 @@ function App() {
               </div>
 
 
-              ) : (viewtheirs)  ? ( // If we want to see other people's list of posts
+              ) : (viewwhichuser)  ? ( // If we want to see other people's list of posts
                               
                   <div className="post__thumbs">
                   
                 {
 
-                  posts.filter(({id, post}) => post.username === viewwhich).map(({id, post}) => (
+                  posts.filter(({id, post}) => post.username === viewwhichuser).map(({id, post}) => (
                     
                     // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewTheirs(false); backToTop(); }}>
+                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
                       <PostThumb 
                           key={id}
                           postId={id}
@@ -289,6 +287,8 @@ function App() {
                     username={post.username}
                     caption={post.caption}
                     imageUrl={post.imageUrl}
+                    viewwhichuser={setViewWhichUser}
+                    viewsinglepost={setViewSinglePost}
                 />  
                                              
               ))
@@ -305,8 +305,7 @@ function App() {
                     username={post.username}
                     caption={post.caption}
                     imageUrl={post.imageUrl}
-                    viewtheirs={setViewTheirs}
-                    viewwhich={setViewWhich}
+                    viewwhichuser={setViewWhichUser}
                     viewsinglepost={setViewSinglePost}
                 />  
               ))
@@ -343,7 +342,14 @@ function App() {
               open={openImageUpload}
               onClose={() => setOpenImageUpload(false)}
             >
-              <ImageUpload username={user.displayName} closemodal={setOpenImageUpload} />
+              <ImageUpload 
+                username={user.displayName} 
+                closemodal={setOpenImageUpload} 
+                // Passing the 2 below so that I can reset those once upload is done
+                viewwhichuser={setViewWhichUser}
+                viewsinglepost={setViewSinglePost}
+
+              />
             </Modal>
             
 
