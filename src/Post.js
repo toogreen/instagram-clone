@@ -58,9 +58,9 @@ function Post({postId, username, user, caption, imageUrl, viewtheirs, viewwhich}
                     className="post__avatar"
                     alt={username}
                     src="/static/images/avatar/1.jpg"
-                    onClick={viewtheirstuff}
+                    onClick={viewtheirs && viewtheirstuff}
                 />
-                <div className="post__username" onClick={viewtheirstuff}>
+                <div className="post__username" onClick={viewtheirs && viewtheirstuff}>
                     <h3>{username}</h3>
                 </div>
             </div>

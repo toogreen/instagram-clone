@@ -7,7 +7,7 @@ function PostThumb({postId, imageUrl}) {
 
     return (
             
-            <div>
+            <div className="post__thumbcontainer">
  
             { 
             // Check if the image is a video instead of an image, and if so, use the VIDEO tag instead
@@ -29,7 +29,6 @@ function PostThumb({postId, imageUrl}) {
                 </div>
                 )
             }
-            
 
         </div>
     )

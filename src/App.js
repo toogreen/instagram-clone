@@ -212,7 +212,7 @@ function App() {
           alt=""
           // onClick={backToTop}
         />
-
+        
         {user ? (
           <Button onClick={() => auth.signOut()}>Logout</Button>
         ): (
@@ -291,7 +291,7 @@ function App() {
                 />  
                                              
               ))
-
+                  
             ) : (
 
               // Else if no posts were selected at all, simply default to display all posts as usual
@@ -310,7 +310,8 @@ function App() {
               ))
 
             )
-            }   
+            }
+
           </div>
           <div className="app__postsRight no-mobile">
             <InstagramEmbed
