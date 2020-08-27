@@ -15,7 +15,7 @@ function PostThumb({postId, imageUrl}) {
             ? 
                 (
                 <div className="post__thumb">
-                    <video width="100%">
+                    <video width="100%" controls preload="metadata" src={imageUrl+"#t=0.1"}>
                         <source src={imageUrl} type='video/mp4'></source>
                         Your browser does not support the video tag.
                     </video>
