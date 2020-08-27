@@ -47,7 +47,8 @@ function ImageUpload({username, closemodal, viewwhichuser, viewsinglepost}) {
                             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                             caption: caption,
                             imageUrl: url,
-                            username: username
+                            username: username,
+                            imagename: image.name
                         });
 
                         // Reset everything once upload process is completed

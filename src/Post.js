@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
-import { db } from './firebase';
+import { storage, db, auth } from './firebase';
 import firebase from 'firebase';
 
 
-function Post({postId, username, user, caption, imageUrl, viewwhichuser}) {
+function Post({postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
 
@@ -40,6 +40,47 @@ function Post({postId, username, user, caption, imageUrl, viewwhichuser}) {
             
     }
 
+    function deletePost(postId) {
+        // event.preventDefault();
+        
+        db.collection("posts").doc(postId).delete().then(function() {
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.log("Error removing document: ", error);            
+        });
+        // Get a reference to the storage service, which is used to create references in your storage bucket
+        var storage = firebase.storage();
+
+        // Create a storage reference from our storage service
+        var storageRef = storage.ref();
+
+        // Create a reference to the file to delete
+        var desertRef = storageRef.child('images/'+imagename);
+
+        // Delete the file
+        desertRef.delete().then(function() {
+        // File deleted successfully
+    
+        }).catch(function(error) {
+        // Uh-oh, an error occurred!
+
+        });
+    
+    }
+
+
+    function deleteComment(commentId) {
+        // event.preventDefault();
+        
+        alert(commentId);
+        
+/*         db.collection("posts").doc(postId).collection("comments").doc(commentId).delete().then(function() {
+            alert("Document successfully deleted!");
+        }).catch(function(error) {
+            alert("Error removing document: ", error);            
+        }); */
+    }
+
     function backtotop(){
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -61,8 +102,14 @@ function Post({postId, username, user, caption, imageUrl, viewwhichuser}) {
                     onClick={viewtheirstuff.bind(this, username) }
                 />
                 <div className="post__username" onClick={viewtheirstuff.bind(this, username)}>
-                    <h3>{username}</h3>
+                    <h3>{username} </h3>
                 </div>
+                {
+                    (user && username === auth.currentUser.displayName) 
+                    &&
+                    <div className="delete__Post" onClick={deletePost.bind(this, postId)}>DELETE this post</div>
+                }
+                
             </div>
 
             <div className="post__imgcontainer">
@@ -88,9 +135,18 @@ function Post({postId, username, user, caption, imageUrl, viewwhichuser}) {
 
             <h4 className="post__text"><strong onClick={viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}</h4>
 
+            
             <div className="post__comments">
                 {comments.map((comment) => (
-                    <p className="post__comment"><strong onClick={viewtheirstuff.bind(this, comment.username)}>{comment.username}: </strong> {comment.text} </p>
+                    <p className="post__comment">
+                        <strong onClick={viewtheirstuff.bind(this, comment.username)}>
+                            {comment.username}: 
+                        </strong> {comment.text} 
+                        <span className="delete__CommentButton" onClick={deleteComment.bind(this, comment.ref)}>
+                            Delete this comment
+                        </span>
+                    </p>
+                    
                 ))}
             </div>
 

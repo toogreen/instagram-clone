@@ -77,6 +77,13 @@
     cursor: pointer;
 }
 
+.delete__Post{
+    float: right;
+    cursor: pointer;
+    padding-right: 20px;
+    font-size: 12px;
+}
+
 /* .post__image{
 }
 

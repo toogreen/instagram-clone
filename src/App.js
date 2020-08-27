@@ -310,6 +310,7 @@ function App() {
                     username={post.username}
                     caption={post.caption}
                     imageUrl={post.imageUrl}
+                    imagename={post.imagename}
                     viewwhichuser={setViewWhichUser}
                     viewsinglepost={setViewSinglePost}
                 />                             
@@ -334,6 +335,7 @@ function App() {
                         username={post.username}
                         caption={post.caption}
                         imageUrl={post.imageUrl}
+                        imagename={post.imagename}
                         viewwhichuser={setViewWhichUser}
                         viewsinglepost={setViewSinglePost}
                     />  
