@@ -33,7 +33,7 @@
     margin: 10px;
     float: left;
     cursor: pointer;
-    flex: 0;
+    flex: 0 auto;
 }
 
 .post__username  {
