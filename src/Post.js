@@ -112,7 +112,9 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                 {
                     user && username === auth.currentUser.displayName
                     &&
-                    <h5 className="delete__Post" onClick={deletePost.bind(this, postId)}>DELETE this post</h5>
+                    <div className="delete__Post" onClick={deletePost.bind(this, postId)}>
+                        <h5>DELETE POST</h5>
+                    </div>
                 }
                 
             </div>
