@@ -237,7 +237,7 @@ function App() {
               posts.filter(({id, post}) => post.username === auth.currentUser.displayName).map(({id, post}) => (
                 
                 // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-                <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); backToTop(); }}>
+                <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewTheirs(false); backToTop(); }}>
                   <PostThumb 
                       key={id}
                       postId={id}
@@ -245,6 +245,7 @@ function App() {
                       username={post.username}
                       caption={post.caption}
                       imageUrl={post.imageUrl}
+
                   />
                 </div>
 
@@ -261,7 +262,7 @@ function App() {
                   posts.filter(({id, post}) => post.username === viewwhich).map(({id, post}) => (
                     
                     // added te below div so that if anyone clicks on this it will set a variable to enable view on a single post
-                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewTheirs(false); backToTop(); }}>
+                    <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewTheirs(false); backToTop(); }}>
                       <PostThumb 
                           key={id}
                           postId={id}
@@ -306,6 +307,7 @@ function App() {
                     imageUrl={post.imageUrl}
                     viewtheirs={setViewTheirs}
                     viewwhich={setViewWhich}
+                    viewsinglepost={setViewSinglePost}
                 />  
               ))
 
