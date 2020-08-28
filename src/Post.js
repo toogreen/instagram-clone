@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, setState } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
 import { storage, db, auth } from './firebase';
 import firebase from 'firebase';
 
-
 function Post({postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
-    const [commentId, setCommentId] = useState([]);
+    const [commentId, setCommentId] = useState('null');
+    const [count, setCount] = useState(0);
+
+/*     const handleChange = (event) =>{
+        alert(event)
+		setCommentId(event)
+	} */
 
 
-    // What follows is for comments under a post
+    // What follows is for comments under a post, when a change is made, it refreshes
     useEffect(() => {
         let unsubscribe;
         if (postId) {
@@ -41,8 +46,6 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
             
     }
 
-    
-
     function deletePost(postId) {
         // event.preventDefault();
         
@@ -71,20 +74,45 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     
     }
 
+    function deleteComment(commentToDel) {
 
-    function deleteComment(commentId) {
-        // event.preventDefault();
+        // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
         
-        
+        db.collection("posts").doc(postId).collection("comments").where("text", "==", commentToDel)
+        .get()
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
 
-        alert(commentId);
-        
-/*         db.collection("posts").doc(postId).collection("comments").doc(commentId).delete().then(function() {
-            alert("Document successfully deleted!");
-        }).catch(function(error) {
-            alert("Error removing document: ", error);            
-        }); */
+            setCount(count + 1)
+            count >= 0 && setCommentId(doc.id, " => ", doc.data()) 
+    
+            })
+            count <= 0 && alert("Please click one more time (yest it's a bug) "+count)
+            deleteCommentAction(commentId) 
+            count = 0
+            
+        })
+        .catch(function(error) {
+            console.log("Error getting documents:", error);
+
+        })
+
     }
+    
+
+    function deleteCommentAction(comId){
+
+        // code to delete comment here
+        db.collection("posts").doc(postId).collection("comments").doc(comId).delete().then(function() {
+            console.log("Document successfully deleted!"+commentId);
+        }).catch(function(error) {
+            console.log("Error removing document:", error);            
+        });
+
+        // This is a very dirty hack to go around the issue whereI have to click twice to delete a comment
+        //document.getElementById("button_deletecomment").click();
+    }
+
 
     function backtotop(){
         document.body.scrollTop = 0; // For Safari
@@ -145,6 +173,7 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
             
             <div className="post__comments">
                 {comments.map((comment) => (
+
                     <p className="post__comment">
                         <strong onClick={viewtheirstuff.bind(this, comment.username)}>
                             {comment.username}: 
@@ -152,10 +181,13 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                         {
                             user && comment.username === auth.currentUser.displayName 
                             &&
-                            // commentId = Object.assign({ uid: doc.id }, doc.data())
-                            <h5 className="delete__CommentButton" onClick={deleteComment.bind(this, JSON.stringify(comment))}>
-                                DELETE
-                            </h5>
+                            <div className="delete__CommentButton" onClick={deleteComment.bind(this, comment.text)}>
+                                <h5 >
+                                    DELETE
+                                </h5>
+                            </div>
+
+
                         }
                     </p>
                     

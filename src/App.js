@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import './App.css';
-import Post, {viewwhichuser} from "./Post";
+import Post from "./Post";
 import PostThumb from "./PostThumb";
 import { db, auth } from "./firebase";
 import {makeStyles } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import ImageUpload from "./ImageUpload"
 import InstagramEmbed from 'react-instagram-embed';
 import Avatar from "@material-ui/core/Avatar";
 import LazyLoad from "react-lazyload";
+
 
 function backToTop(){
   document.body.scrollTop = 0; // For Safari
@@ -61,6 +62,7 @@ function App() {
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState('');
+  const [commentId, setCommentId] = useState('null');
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
