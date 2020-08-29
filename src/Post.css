@@ -97,6 +97,15 @@
     /* display: none; */
 }
 
+.button__delComment{
+    border: none;
+    color: #6082a3;
+    background-color: transparent;
+    font-size: 12px;
+    color: red;
+    cursor: pointer;
+}
+
 /* .post__image{
 }
 
