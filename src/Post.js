@@ -117,7 +117,7 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                     user && username === auth.currentUser.displayName
                     &&
                     <div className="delete__Post">
-                    {/* This is where the 3 dots menu appear to delete comments */}
+                    {/* This is where the 3 dots menu appear to delete POSTS */}
                         <MenuPopupState 
                             datatopass={postId}
                             functiontopass={deletePost}
