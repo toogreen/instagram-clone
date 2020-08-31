@@ -1,6 +1,7 @@
 import React, { useEffect, useState, setState } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { storage, db, auth } from './firebase';
 import firebase from 'firebase';
 
@@ -8,12 +9,6 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
     const [commentId, setCommentId] = useState('null');
-    const [count, setCount] = useState(0);
-
-/*     const handleChange = (event) =>{
-        alert(event)
-		setCommentId(event)
-	} */
 
 
     // What follows is for comments under a post, when a change is made, it refreshes
@@ -77,41 +72,25 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     function deleteComment(commentToDel) {
 
         // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
+
         
-        db.collection("posts").doc(postId).collection("comments").where("text", "==", commentToDel)
+        db.collection("posts")
+        .doc(postId)
+        .collection("comments")
+        .where("text", "==", commentToDel)
         .get()
-        .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
 
-            setCount(count + 1)
-            count >= 0 && setCommentId(doc.id, " => ", doc.data()) 
-    
-            })
-            count <= 0 && alert("Please click one more time (yest it's a bug) "+count)
-            deleteCommentAction(commentId) 
-            count = 0
-            
-        })
-        .catch(function(error) {
-            console.log("Error getting documents:", error);
+            doc.ref.delete(); 
 
-        })
-
-    }
-    
-
-    function deleteCommentAction(comId){
-
-        // code to delete comment here
-        db.collection("posts").doc(postId).collection("comments").doc(comId).delete().then(function() {
-            console.log("Document successfully deleted!"+commentId);
-        }).catch(function(error) {
-            console.log("Error removing document:", error);            
+          });
         });
 
-        // This is a very dirty hack to go around the issue whereI have to click twice to delete a comment
-        //document.getElementById("button_deletecomment").click();
     }
+    
+
+
 
 
     function backtotop(){
@@ -182,7 +161,7 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                             user && comment.username === auth.currentUser.displayName 
                             &&
                             <div className="delete__CommentButton" onClick={deleteComment.bind(this, comment.text)}>
-                                <h5 >
+                                <h5>
                                     DELETE
                                 </h5>
                             </div>
