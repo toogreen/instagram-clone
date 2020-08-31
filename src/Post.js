@@ -1,14 +1,13 @@
 import React, { useEffect, useState, setState } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { storage, db, auth } from './firebase';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { db, auth } from './firebase';
 import firebase from 'firebase';
 
 function Post({postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState([]);
-    const [commentId, setCommentId] = useState('null');
+    const [comment, setComment] = useState([])
 
 
     // What follows is for comments under a post, when a change is made, it refreshes

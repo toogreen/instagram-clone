@@ -5,10 +5,12 @@
   "homepage": "https://toogreen.ca/instagreen/",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "firebase": "^7.19.0",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-instagram-embed": "^1.5.0",
