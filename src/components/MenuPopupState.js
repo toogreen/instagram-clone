@@ -18,7 +18,9 @@ const MenuPopupState = (props) => {
     <div>
       <MoreVertIcon variant="contained" {...bindTrigger(popupState)} />
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={props.deletecomment.bind(this, props.comment)}>DELETE</MenuItem>
+        <MenuItem onClick={props.deletecomment.bind(this, props.comment)}>
+          <h5>Delete this comment</h5>
+        </MenuItem>
       </Menu>
     </div>
   )
