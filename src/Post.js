@@ -1,9 +1,10 @@
 import React, { useEffect, useState, setState } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { db, auth } from './firebase';
 import firebase from 'firebase';
+import MenuPopupState from "./components/MenuPopupState"
+
 
 function Post({postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
@@ -65,13 +66,13 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
         // Uh-oh, an error occurred!
 
         });
-    
+
     }
 
     function deleteComment(commentToDel) {
 
         // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
-
+      
         
         db.collection("posts")
         .doc(postId)
@@ -80,16 +81,13 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
-
+      
             doc.ref.delete(); 
-
+      
           });
         });
-
-    }
-    
-
-
+      
+      }
 
 
     function backtotop(){
@@ -152,23 +150,28 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
             <div className="post__comments">
                 {comments.map((comment) => (
 
-                    <p className="post__comment">
-                        <strong onClick={viewtheirstuff.bind(this, comment.username)}>
-                            {comment.username}: 
-                        </strong> {comment.text} 
-                        {
-                            user && comment.username === auth.currentUser.displayName 
-                            &&
-                            <div className="delete__CommentButton" onClick={deleteComment.bind(this, comment.text)}>
-                                <h5>
-                                    DELETE
-                                </h5>
-                            </div>
+                    <div className="comment_container">
 
+                        <p className="post__comment">
+                            <strong onClick={viewtheirstuff.bind(this, comment.username)}>
+                                {comment.username}: 
+                            </strong> {comment.text} 
+                        </p>
+                        <div className="delete__CommentButton" >
+                            {
+                                user && comment.username === auth.currentUser.displayName 
+                                &&
+                                <div className="comment__morevert">
 
-                        }
-                    </p>
-                    
+                                    <MenuPopupState 
+                                        comment={comment.text}
+                                        deletecomment={deleteComment}
+                                    />
+                                </div>
+                            } 
+                        </div>
+                    </div>
+                   
                 ))}
             </div>
 
