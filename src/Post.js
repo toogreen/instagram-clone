@@ -74,8 +74,6 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
 
 
     const deleteComment = (event) => {
-        
-        event.preventDefault();
 
         event.preventDefault();
 
