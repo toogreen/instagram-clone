@@ -12,6 +12,7 @@ import Avatar from "@material-ui/core/Avatar";
 import LazyLoad from "react-lazyload";
 
 
+
 function backToTop(){
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -106,8 +107,6 @@ function App() {
       })
     })
     .catch((error) => alert(error.message));
-
-    // Set user so that footer changes accordingly
     
 
     // Close modal
@@ -215,8 +214,8 @@ function App() {
           className="app__headerImage"
           src="https://toogreen.ca/instagreen/img/instagreen.svg"
           height="40px;"
-          alt=""
-          // onClick={backToTop}
+          alt="Instagreen logo"
+          //onClick={backToTop}
         />
         
         {user ? (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, setState } from 'react'
+import React, { useEffect, useState, setState, state } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
 import { storage, db, auth } from './firebase';
@@ -9,8 +9,6 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
     const [commentId, setCommentId] = useState("null");
-    const [commentsId, setCommentsId] = useState("null");
-    const [count, setCount] = useState(0);
 
 
     // What follows is for comments under a post, when a change is made, it refreshes
@@ -73,7 +71,11 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     }
 
 
+
+
     const deleteComment = (event) => {
+        
+        event.preventDefault();
 
         event.preventDefault();
 
@@ -81,24 +83,28 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
         .get()
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
+            
+                setCommentId(doc.id, " => ", doc.data())
 
-            setCommentId(doc.id, " => ", doc.data())
             })
             
-            // code to delete comment here
-            deleteCommentAction(commentId)
-
+            
         })
         .catch(function(error) {
             console.log("Error getting documents:", error);
+            
         })
+        deleteCommentAction(commentId)
 
     }
 
-    function deleteCommentAction(comId){
+    function deleteCommentAction(commentId){
+     
 
+        //alert(commentId)
+        
         // code to delete comment here
-        db.collection("posts").doc(postId).collection("comments").doc(comId).delete().then(function() {
+        db.collection("posts").doc(postId).collection("comments").doc(commentId).delete().then(function() {
             console.log("Document successfully deleted!"+commentId);
         }).catch(function(error) {
             console.log("Error removing document:", error);            
@@ -112,6 +118,10 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     function backtotop(){
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+
+    const handleChange = (event) => {
+        this.setState({value: event.target.value});
     }
 
     // Function to view others' posts
@@ -184,12 +194,13 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                                             type="hidden"
                                             name="commentToDel"
                                             value={comment.text}
+                                            onChange={handleChange}
                                         >
                                         </input>
                                         <button
                                             className="button__delComment"
                                             type="submit"
-                                            onChange={(e) => setCommentId(e.target.value)}
+                                            // onClick={()=> setDeleteComment(true)}
                                         >
                                             DELETE
                                         </button>
