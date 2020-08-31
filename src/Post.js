@@ -116,9 +116,15 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                 {
                     user && username === auth.currentUser.displayName
                     &&
-                    <div className="delete__Post" onClick={deletePost.bind(this, postId)}>
-                        <h5>DELETE POST</h5>
+                    <div className="delete__Post">
+                    {/* This is where the 3 dots menu appear to delete comments */}
+                        <MenuPopupState 
+                            datatopass={postId}
+                            functiontopass={deletePost}
+                            labeltopass="Delete this post"
+                        />
                     </div>
+
                 }
                 
             </div>
@@ -162,10 +168,12 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                                 user && comment.username === auth.currentUser.displayName 
                                 &&
                                 <div className="comment__morevert">
-
+                                    
+                                    {/* This is where the 3 dots menu appear to delete comments */}
                                     <MenuPopupState 
-                                        comment={comment.text}
-                                        deletecomment={deleteComment}
+                                        datatopass={comment.text}
+                                        functiontopass={deleteComment}
+                                        labeltopass="Delete this comment"
                                     />
                                 </div>
                             } 

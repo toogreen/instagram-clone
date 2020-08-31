@@ -18,8 +18,8 @@ const MenuPopupState = (props) => {
     <div>
       <MoreVertIcon variant="contained" {...bindTrigger(popupState)} />
       <Menu {...bindMenu(popupState)}>
-        <MenuItem onClick={props.deletecomment.bind(this, props.comment)}>
-          <h5>Delete this comment</h5>
+        <MenuItem onClick={props.functiontopass.bind(this, props.datatopass)}>
+          <h5>{props.labeltopass}</h5>
         </MenuItem>
       </Menu>
     </div>
