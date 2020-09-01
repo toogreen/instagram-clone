@@ -463,7 +463,14 @@ function App() {
                 <img onClick={home} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
               </div>
               <div className="footer__middle">
-              <center><h4>{lang ? "Connectez-vous pour publier ou commenter":"Please login first to upload or comment"}</h4></center>   
+                  <Button onClick={() => setOpenSignIn(true)}>
+                    {lang ? "CONNEXION":"SIGN IN"}
+                  </Button>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;     
+                  <Button onClick={() => setOpen(true)}>
+                    {lang ? "INSCRIPTION":"SIGN UP"}
+                  </Button>
+                  
               </div>
               <div className="footer__right">
                   &nbsp;
