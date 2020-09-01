@@ -353,6 +353,7 @@ function App() {
               posts.filter(({id, post}) => id === singlepostid).map(({id, post}) => (
                 <Post 
                     key={id}
+                    lang={lang}
                     postId={id}
                     user={user}
                     username={post.username}
