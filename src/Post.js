@@ -1,9 +1,10 @@
-import React, { useEffect, useState, setState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
 import { db, auth } from './firebase';
 import firebase from 'firebase';
 import MenuPopupState from "./components/MenuPopupState"
+import Textarea from 'react-expanding-textarea'
 
 
 function Post({lang, postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
@@ -98,6 +99,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
         viewwhichuser(userselected);
         backtotop();
     }
+
      
     return (
         <div className="post">
@@ -148,9 +150,17 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                 }
 
             </div>            
-
-            <h4 className="post__text"><strong onClick={viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}</h4>
-
+            
+            
+           
+            <h4 className="post__text">
+                {
+                caption && // Only if the caption field is NOT empty, display it along with the user name
+                    <span>
+                        <strong onClick={viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}
+                    </span>
+                }
+            </h4>
             
             <div className="post__comments">
                 {comments.map((comment) => (
@@ -186,7 +196,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
 
                 {user && ( // Only display this comment form input if the user has logged in
                     <form className="post__commentBox">
-                        <input 
+                        <Textarea
                             className="post__input"
                             type="text"
                             placeholder={lang ? "Ajoutez un commentaire":"Add a comment"}

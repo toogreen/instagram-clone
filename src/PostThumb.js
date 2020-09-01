@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { db } from './firebase';
+import React from 'react'
 import "./Post.css"
 
 function PostThumb({postId, imageUrl}) {

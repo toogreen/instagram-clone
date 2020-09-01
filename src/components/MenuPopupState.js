@@ -1,6 +1,5 @@
 import * as React from 'react'
 import "./../Post.css"
-import {Button, Input} from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'

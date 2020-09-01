@@ -3,6 +3,7 @@ import { Button } from "@material-ui/core"
 import firebase from "firebase"
 import { storage, db } from "./firebase"
 import './ImageUpload.css'
+import Textarea from 'react-expanding-textarea'
 
 function ImageUpload({lang, username, closemodal, viewwhichuser, viewsinglepost}) {
     const [image, setImage] = useState(null);
@@ -67,11 +68,12 @@ function ImageUpload({lang, username, closemodal, viewwhichuser, viewsinglepost}
         )
     }
 
+
     return (
         <div className="imageupload">
             <h1>{lang}</h1>
             <progress className="imageupload__progress" value={progress} max="100" />
-            <input type="text" placeholder={lang ? 'Ajoutez une description':'Enter a caption...'} onChange={event => setCaption(event.target.value)}/>
+            <Textarea type="text" placeholder={lang ? 'Ajoutez une description':'Enter a caption...'} onChange={event => setCaption(event.target.value)}/>
             <input type="file" onChange={handleChange} />
             <Button onClick={handleUpload}>
                 {lang ? "Publier":"Upload"} 
