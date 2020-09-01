@@ -58,7 +58,6 @@ footer{
   justify-content: center;
   justify-content: space-between;
   object-fit: contain;
-  vertical-align: text-bottom;
 }
 
 footer h4{
@@ -88,12 +87,16 @@ footer h4{
 
 .footer__middle{
   flex: 1;
+}
+
+.footer__middle Button{
+  flex: 1;
   padding-top: 15px;
 }
 
   .app__add-postImg{
     height: 30px;
-    padding-top: 5px;
+    padding-top: 10px;
   }
 
   .footer__right{

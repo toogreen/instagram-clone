@@ -464,9 +464,8 @@ function App() {
               </div>
               <div className="footer__middle">
                   <Button onClick={() => setOpenSignIn(true)}>
-                    {lang ? "CONNEXION":"SIGN IN"}
-                  </Button>
-                    &nbsp;&nbsp;|&nbsp;&nbsp;     
+                    {lang ? "CONNEXION":"SIGN IN"} &nbsp;&nbsp;
+                  </Button> 
                   <Button onClick={() => setOpen(true)}>
                     {lang ? "INSCRIPTION":"SIGN UP"}
                   </Button>
