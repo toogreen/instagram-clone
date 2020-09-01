@@ -25,7 +25,7 @@ const MenuPopupState = (props) => {
         {
           props.topmenu && (
             (props.topmenu && props.user) ? (
-              <MenuItem>
+              <MenuItem onClick={popupState.close}>
                 <h5 onClick={props.signout}>{props.signoutlabel}</h5>
               </MenuItem>
             ) : (
