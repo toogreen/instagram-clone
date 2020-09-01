@@ -73,6 +73,7 @@ function ImageUpload({lang, username, closemodal, viewwhichuser, viewsinglepost}
         <div className="imageupload">
             <h1>{lang}</h1>
             <progress className="imageupload__progress" value={progress} max="100" />
+            <br /><br />
             <Textarea type="text" placeholder={lang ? 'Ajoutez une description':'Enter a caption...'} onChange={event => setCaption(event.target.value)}/>
             <input type="file" onChange={handleChange} />
             <Button onClick={handleUpload}>
