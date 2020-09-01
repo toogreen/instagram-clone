@@ -10,7 +10,6 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([])
 
-
     // What follows is for comments under a post, when a change is made, it refreshes
     useEffect(() => {
         let unsubscribe;
@@ -88,7 +87,6 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
         });
       
       }
-
 
     function backtotop(){
         document.body.scrollTop = 0; // For Safari

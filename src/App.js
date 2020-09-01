@@ -62,7 +62,12 @@ function App() {
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState('');
-  const [commentId, setCommentId] = useState('null');
+  const [isToggled, setToggled] = useState(false);
+  const [lang, setLang] = useState("en")
+
+  // This is to toggle from FR to EN
+  const toggleTrueFalse = () => setToggled(!isToggled);
+
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
@@ -76,6 +81,7 @@ function App() {
         // if user has logged out... 
         setUser(null);
       }
+      
     })
 
     return () => {
@@ -94,6 +100,19 @@ function App() {
         })));
       })
   }, []);
+
+  // To automatically change language text desc
+  useEffect((toggleLang) => {
+        // To toggle lang
+        if (isToggled) {
+          // If user clicked FR
+          setLang("FR")
+          console.log(lang)
+        } else {
+          setLang("EN")
+          console.log(lang)
+        }  
+  })
 
   const signUp = (event) => {
 
@@ -130,6 +149,7 @@ function App() {
     setViewSinglePost(false); 
     backToTop();    
   }
+
 
   return (
     <div className="app">
@@ -168,7 +188,7 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" onClick={signUp}>Sign Up</Button>
+            <Button type="submit" onClick={signUp}>Sigh Up</Button>
 
           </form>
 
@@ -220,7 +240,11 @@ function App() {
         />
         
         {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
+
+          <div className="app__loginContainer">
+              <Button onClick={toggleTrueFalse}>{lang}</Button>
+              <Button onClick={() => auth.signOut()}>{isToggled ? "Logout":"Déconnecter"}</Button>
+          </div>
         ): (
           <div className="app__loginContainer">
               <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>

@@ -21,6 +21,9 @@ const MenuPopupState = (props) => {
         <MenuItem onClick={props.functiontopass.bind(this, props.datatopass)}>
           <h5>{props.labeltopass}</h5>
         </MenuItem>
+        <MenuItem onClick={popupState.close}>
+          <h5>CANCEL</h5>
+        </MenuItem>
       </Menu>
     </div>
   )
