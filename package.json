@@ -16,6 +16,7 @@
     "react-dom": "^16.13.1",
     "react-instagram-embed": "^1.5.0",
     "react-lazyload": "^3.0.0",
+    "react-linkify": "^1.0.0-alpha",
     "react-scripts": "^3.4.3"
   },
   "scripts": {

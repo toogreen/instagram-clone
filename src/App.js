@@ -10,6 +10,7 @@ import ImageUpload from "./ImageUpload"
 import InstagramEmbed from 'react-instagram-embed';
 import Avatar from "@material-ui/core/Avatar";
 import LazyLoad from "react-lazyload";
+import MenuPopupState from "./components/MenuPopupState"
 
 
 function backToTop(){
@@ -62,7 +63,11 @@ function App() {
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState('');
-  const [commentId, setCommentId] = useState('null');
+  const [lang, setLang] = useState(false);
+
+  // This is to toggle from FR to EN
+  const toggleLang = () => setLang(!lang);
+
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
@@ -76,6 +81,7 @@ function App() {
         // if user has logged out... 
         setUser(null);
       }
+      
     })
 
     return () => {
@@ -95,6 +101,19 @@ function App() {
       })
   }, []);
 
+  // To automatically change language text desc - Not necessary for now actually
+/*   useEffect((toggleLang) => {
+        // To toggle lang
+        if (lang) {
+          // If user clicked FR
+          setLang("FR")
+          console.log(lang)
+        } else {
+          setLang("EN")
+          console.log(lang)
+        }  
+  })
+ */
   const signUp = (event) => {
 
     // This is to prevent the page from refreshing when we submit the form
@@ -131,6 +150,7 @@ function App() {
     backToTop();    
   }
 
+
   return (
     <div className="app">
 
@@ -151,24 +171,24 @@ function App() {
 
             <Input 
               type="text"
-              placeholder="username"
+              placeholder={lang ? "Nom d'utilisateur":"username"}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             /> 
             <Input 
-              placeholder="email"
+              placeholder={lang ? "Courriel":"email"}
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input 
-              placeholder="password"
+              placeholder={lang ? "Mot de passe":"password"}
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" onClick={signUp}>Sign Up</Button>
+            <Button type="submit" onClick={signUp}>{lang ? "Inscrivez-vous":"Sign Up"}</Button>
 
           </form>
 
@@ -191,19 +211,19 @@ function App() {
             </center>
 
             <Input 
-              placeholder="email"
+              placeholder={lang ? "Courriel":"email"}
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input 
-              placeholder="password"
+              placeholder={lang ? "Mot de passe":"password"}
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button type="submit" onClick={signIn}>Sign In</Button>
+            <Button type="submit" onClick={signIn}>{lang ? "Connectez-vous":"Sign In"}</Button>
 
           </form>
 
@@ -216,17 +236,42 @@ function App() {
           src="https://toogreen.ca/instagreen/img/instagreen.svg"
           height="40px;"
           alt=""
-          // onClick={backToTop}
         />
-        
-        {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-        ): (
-          <div className="app__loginContainer">
-              <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-              <Button onClick={() => setOpen(true)}>Sign Up</Button>
+
+        <div className="app__loginContainer">
+
+              <div className="loginLeft">
+                { user ? (
+                  <Button onClick={() => auth.signOut()}>{lang ? "Déconnecter":"Logout"}</Button>
+                ) : (
+                  <Button onClick={() => toggleLang()}>{lang ? "EN":"FR"}</Button>
+                )
+                }
+                
+                
+             </div>
+
+            <div className="loginRight">
+              <Button  aria-controls="fade-menu" aria-haspopup="true" > 
+                <MenuPopupState 
+                  topmenu={true}
+                  lang={lang}
+                  user={user}
+                  functiontopass={toggleLang}
+                  labeltopass={lang ? "Switch to English" : "Passer au français"}
+                  signout={() => auth.signOut()}
+                  signoutlabel={lang ? "Déconnecter":"Logout"}
+                  signin={() => setOpenSignIn(true)}
+                  signinlabel={lang ? "Me Connecter" : "Sign In"}
+                  signup={() => setOpen(true)}
+                  signuplabel={lang ? "M'enregistrer" : "Sign Up"}
+                />
+              </Button>
+
+            </div>
+
           </div>
-        )}
+        
 
       </header>
 
@@ -253,12 +298,12 @@ function App() {
                     <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
                       <PostThumb 
                           key={id}
+                          lang={lang}
                           postId={id}
                           user={user}
                           username={post.username}
                           caption={post.caption}
                           imageUrl={post.imageUrl}
-
                       />
                     </div>
                   </LazyLoad>
@@ -285,6 +330,7 @@ function App() {
                       <div onClick={() => {setViewSinglePost(true); setSinglePostId(id); setViewMine(false); setViewWhichUser(null); backToTop(); }}>
                         <PostThumb 
                             key={id}
+                            lang= {lang}
                             postId={id}
                             user={user}
                             username={post.username}
@@ -332,6 +378,7 @@ function App() {
                   >
                     <Post 
                         key={id}
+                        lang={lang}
                         postId={id}
                         user={user}
                         username={post.username}
@@ -378,6 +425,7 @@ function App() {
               onClose={() => setOpenImageUpload(false)}
             >
               <ImageUpload 
+                lang={lang}
                 username={user.displayName} 
                 closemodal={setOpenImageUpload} 
                 // Passing the 2 below so that I can reset those once upload is done
@@ -414,7 +462,7 @@ function App() {
                 <img onClick={home} className="app__home" src="https://toogreen.ca/instagreen/img/home.svg" alt='home icon to go back up'/>         
               </div>
               <div className="footer__middle">
-              <center><h4>Please login first to upload or comment</h4></center>   
+              <center><h4>{lang ? "Connectez-vous pour publier ou commenter":"Please login first to upload or comment"}</h4></center>   
               </div>
               <div className="footer__right">
                   &nbsp;

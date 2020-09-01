@@ -31,7 +31,13 @@
 
 .app__headerImage{
   object-fit: contain;
+  flex: 0;
   /* cursor: pointer; */
+}
+
+.app__loginContainer{
+  display: flex;
+  float: right;
 }
 
 .app__signup{

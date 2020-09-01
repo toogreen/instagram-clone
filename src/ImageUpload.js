@@ -4,7 +4,7 @@ import firebase from "firebase"
 import { storage, db } from "./firebase"
 import './ImageUpload.css'
 
-function ImageUpload({username, closemodal, viewwhichuser, viewsinglepost}) {
+function ImageUpload({lang, username, closemodal, viewwhichuser, viewsinglepost}) {
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
     const [caption, setCaption] = useState('');
@@ -69,11 +69,12 @@ function ImageUpload({username, closemodal, viewwhichuser, viewsinglepost}) {
 
     return (
         <div className="imageupload">
+            <h1>{lang}</h1>
             <progress className="imageupload__progress" value={progress} max="100" />
-            <input type="text" placeholder='Enter a caption...' onChange={event => setCaption(event.target.value)}/>
+            <input type="text" placeholder={lang ? 'Ajoutez une description':'Enter a caption...'} onChange={event => setCaption(event.target.value)}/>
             <input type="file" onChange={handleChange} />
             <Button onClick={handleUpload}>
-                Upload
+                {lang ? "Publier":"Upload"} 
             </Button>
         </div>
     )
