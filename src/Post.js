@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import MenuPopupState from "./components/MenuPopupState"
 
 
-function Post({postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
+function Post({lang, postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([])
 
@@ -117,9 +117,10 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                     <div className="delete__Post">
                     {/* This is where the 3 dots menu appear to delete POSTS */}
                         <MenuPopupState 
+                            lang={lang}
                             datatopass={postId}
                             functiontopass={deletePost}
-                            labeltopass="Delete this post"
+                            labeltopass={lang ? "Effacer cette publication":"Delete this post"}
                         />
                     </div>
 
@@ -169,9 +170,10 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                                     
                                     {/* This is where the 3 dots menu appear to delete comments */}
                                     <MenuPopupState 
+                                        lang={lang}
                                         datatopass={comment.text}
                                         functiontopass={deleteComment}
-                                        labeltopass="Delete this comment"
+                                        labeltopass={lang ? "Effacez ce commentaire":"Delete this comment"}
                                     />
                                 </div>
                             } 
@@ -187,7 +189,7 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                         <input 
                             className="post__input"
                             type="text"
-                            placeholder="Add a comment"
+                            placeholder={lang ? "Ajoutez un commentaire":"Add a comment"}
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         />
@@ -198,7 +200,7 @@ function Post({postId, username, user, caption, imageUrl, imagename, viewwhichus
                             type="submit"
                             onClick={postComment}
                         >
-                            Post
+                            {lang ? "Publier":"Post"}
                         </button>
                     </form>
                 )}
