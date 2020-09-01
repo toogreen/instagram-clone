@@ -19,28 +19,28 @@ const MenuPopupState = (props) => {
       <MoreVertIcon variant="contained" {...bindTrigger(popupState)}  aria-controls="fade-menu" aria-haspopup="true" />
       <Menu {...bindMenu(popupState)}>
         <MenuItem onClick={popupState.close}>
-          <h5 onClick={props.functiontopass.bind(this, props.datatopass)}>{props.labeltopass}</h5>
+          <span onClick={props.functiontopass.bind(this, props.datatopass)}>{props.labeltopass}</span>
         </MenuItem>
         {
           props.topmenu && (
             (props.topmenu && props.user) ? (
               <MenuItem onClick={popupState.close}>
-                <h5 onClick={props.signout}>{props.signoutlabel}</h5>
+                <span onClick={props.signout}>{props.signoutlabel}</span>
               </MenuItem>
             ) : (
               <div>
                 <MenuItem onClick={popupState.close}>
-                  <h5 onClick={props.signin}>{props.signinlabel}</h5>
+                  <span onClick={props.signin}>{props.signinlabel}</span>
                 </MenuItem>
                 <MenuItem onClick={popupState.close}>
-                  <h5 onClick={props.signup}>{props.signuplabel}</h5>
+                  <span onClick={props.signup}>{props.signuplabel}</span>
                 </MenuItem>
               </div>
             )
           )
         }
         <MenuItem onClick={popupState.close}>
-          <h5>{props.lang ? "ANNULER":"CANCEL"}</h5>
+          <span><strong>{props.lang ? "ANNULER":"CANCEL"}</strong></span>
         </MenuItem>
       </Menu>
     </div>

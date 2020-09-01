@@ -258,7 +258,7 @@ function App() {
                   lang={lang}
                   user={user}
                   functiontopass={toggleLang}
-                  labeltopass={lang ? "Switch to English" : "Passer au français"}
+                  labeltopass={lang ? "English Version" : "Version française"}
                   signout={() => auth.signOut()}
                   signoutlabel={lang ? "Déconnecter":"Logout"}
                   signin={() => setOpenSignIn(true)}
