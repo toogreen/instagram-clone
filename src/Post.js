@@ -115,7 +115,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                     <h3>{username} </h3>
                 </div>
                 {
-                    user && username === auth.currentUser.displayName
+                    ( user && username === auth.currentUser.displayName || user && auth.currentUser.email === "admin@gmail.com" )
                     &&
                     <div className="delete__Post">
                     {/* This is where the 3 dots menu appear to delete POSTS */}
@@ -176,7 +176,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                         </p>
                         <div className="delete__CommentButton" >
                             {
-                                user && comment.username === auth.currentUser.displayName 
+                                ( user && username === auth.currentUser.displayName || user && auth.currentUser.email === "admin@gmail.com" )
                                 &&
                                 <div className="comment__morevert">
                                     
