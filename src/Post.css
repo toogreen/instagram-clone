@@ -96,9 +96,23 @@ input, textarea, .post__input{
     padding: 20px;
 }
 
+.post__thumbs{
+    width: 100%;
+    max-width: 500px;
+}
+
 .post__thumb{
     width: 100%;
     cursor: pointer;
+    width: 100%; /* width of container */
+    height: 100px;; /* height of container */
+    overflow: hidden;
+    padding: 0px;
+}
+
+.post__thumb img {
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
 }
 
 .comment_container{
@@ -143,5 +157,20 @@ input, textarea, .post__input{
     object-fit: none;
 }
 
+
 .post__thumbcontainer {
-} */
+    max-width: 500px;
+    width: 100%;
+} 
+*/
+
+@media (max-width: 768px) {
+    .post__thumb{
+        width: 100%;
+        cursor: pointer;
+        width: 100%; /* width of container */
+        height: 80px;; /* height of container */
+        overflow: hidden;
+        padding: 0px;
+    }
+  }
