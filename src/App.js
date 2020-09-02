@@ -52,10 +52,10 @@ const Spinner = () => (
 
 const locale =() => {
   
-  if (getUserLocale().includes("en")) {
-    return(false)
-  } else {
+  if (getUserLocale().includes("fr")) {
     return(true)
+  } else {
+    return(false)
   }
 }
 
