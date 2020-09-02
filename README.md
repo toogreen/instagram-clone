@@ -70,7 +70,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### For this instagram-clone you will need to add:
 
+npm i react-scripts <br>
 npm i firebase <br>
 npm install -g firebase-tools <br>
 npm install @material-ui/core <br>
-npm i react-instagram-embed
+npm i react-instagram-embed <br>
+npm i @material-ui/icons <br>
+npm i material-ui-popup-state <br>
+npm i react-expanding-textarea <br>
+npm i react-instagram-embed (optional) <br>
+npm i react-lazyload <br>
+npm i react-linkify <br>

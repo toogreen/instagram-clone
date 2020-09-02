@@ -3,13 +3,20 @@ import "./Post.css"
 import Avatar from "@material-ui/core/Avatar"
 import { db, auth } from './firebase';
 import firebase from 'firebase';
-import MenuPopupState from "./components/MenuPopupState"
-import Textarea from 'react-expanding-textarea'
-
+import MenuPopupState from "./components/MenuPopupState";
+import Textarea from 'react-expanding-textarea';
+import Linkify from 'react-linkify';
 
 function Post({lang, postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
     const [comments, setComments] = useState([]);
-    const [comment, setComment] = useState([])
+    const [comment, setComment] = useState([]);
+
+    // Added this to make Linkify links open up in a new tab by default, and add the other AODA necessary parameters as well
+    const componentDecorator = (href, text, key) => (
+        <a href={href} key={key} target="_blank" rel="noopener noreferrer">
+            {text}
+        </a>
+    );
 
     // What follows is for comments under a post, when a change is made, it refreshes
     useEffect(() => {
@@ -154,12 +161,12 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
             
             
            
-            <h4 className="post__text">
+            <h4 className="post__text breakfix">
                 {
                 caption && // Only if the caption field is NOT empty, display it along with the user name
-                    <span>
+                    <Linkify componentDecorator={componentDecorator}>
                         <strong onClick={viewtheirstuff.bind(this, username)}>{username}: </strong>{caption}
-                    </span>
+                    </Linkify>
                 }
             </h4>
             
@@ -169,10 +176,12 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
 
                     <div className="comment_container">
 
-                        <p className="post__comment">
-                            <strong onClick={viewtheirstuff.bind(this, comment.username)}>
-                                {comment.username}: 
-                            </strong> {comment.text} 
+                        <p className="post__comment breakfix">
+                            <Linkify componentDecorator={componentDecorator}>
+                                <strong onClick={viewtheirstuff.bind(this, comment.username)}>
+                                    {comment.username}: 
+                                </strong> {comment.text} 
+                            </Linkify>
                         </p>
                         <div className="delete__CommentButton" >
                             {
