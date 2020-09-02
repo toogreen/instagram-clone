@@ -17,6 +17,12 @@
   margin-left: 20px;
 }
 
+.floating{
+  position: absolute;
+	position: -webkit-sticky;
+  position: sticky;
+}
+
 .app__header {
   background-color: white;
   padding: 20px;

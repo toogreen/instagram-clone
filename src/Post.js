@@ -165,6 +165,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
             <div className="post__comments">
                 {comments.map((comment) => (
 
+
                     <div className="comment_container">
 
                         <p className="post__comment">
@@ -189,6 +190,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                             } 
                         </div>
                     </div>
+
                    
                 ))}
             </div>
