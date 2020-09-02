@@ -69,6 +69,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
 
     }
 
+
     function deleteComment(commentToDel) {
 
         // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
