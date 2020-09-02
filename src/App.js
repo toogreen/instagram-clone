@@ -11,6 +11,7 @@ import InstagramEmbed from 'react-instagram-embed';
 import Avatar from "@material-ui/core/Avatar";
 import LazyLoad from "react-lazyload";
 import MenuPopupState from "./components/MenuPopupState"
+import getUserLocale from 'get-user-locale'
 
 
 function backToTop(){
@@ -46,6 +47,22 @@ const Spinner = () => (
   </div>
 );
 
+
+// Determine language from the user's computer or browser
+
+const locale =() => {
+  
+  if (getUserLocale().includes("en")) {
+    return(false)
+  } else {
+    return(true)
+  }
+}
+
+
+
+console.log(locale);
+
 function App() {
 
   const classes = useStyles();
@@ -63,7 +80,9 @@ function App() {
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState('');
-  const [lang, setLang] = useState(false);
+  const [lang, setLang] = useState(locale);
+
+  console.log(lang)
 
   // This is to toggle from FR to EN
   const toggleLang = () => setLang(!lang);

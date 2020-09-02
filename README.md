@@ -81,3 +81,4 @@ npm i react-expanding-textarea <br>
 npm i react-instagram-embed (optional) <br>
 npm i react-lazyload <br>
 npm i react-linkify <br>
+npm install get-user-locale <br>
