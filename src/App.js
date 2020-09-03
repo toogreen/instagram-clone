@@ -47,21 +47,33 @@ const Spinner = () => (
   </div>
 );
 
-
-// Determine language from the user's computer or browser
-
-const locale =() => {
+//let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)cookielang\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+let savedlangValue
+// Retrieve
+if (typeof(Storage) !== "undefined") {
   
-  if (getUserLocale().includes("fr")) {
-    return(true)
+// Store  
+savedlangValue = localStorage.getItem("savedlang");
+console.log("savedValue value is : "+savedlangValue)
+} else {
+  console.log("Sorry, your browser does not support Web Storage...");
+}
+
+
+let browserValue = getUserLocale().includes("fr")
+console.log("browser value is "+browserValue)
+
+
+function localeload(){
+  
+  if (savedlangValue !== null) {
+    return(savedlangValue)
   } else {
-    return(false)
+    return(browserValue)
   }
 }
 
 
-
-console.log(locale);
 
 function App() {
 
@@ -80,13 +92,29 @@ function App() {
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState('');
-  const [lang, setLang] = useState(locale);
+  const [lang, setLang] = useState(localeload);
 
-  console.log(lang)
+  console.log("Language after loading const is "+lang)
 
-  // This is to toggle from FR to EN
-  const toggleLang = () => setLang(!lang);
+  
 
+
+/*   console.log("right now cookielang = "+cookies.cookielang)
+
+  console.log("localeload value now is "+lang)
+ */
+
+  // This is to toggle from FR to EN and vice-versa
+  function toggleLang(){
+  
+    setLang(!lang)
+    //setCookie('cookielang', !lang, { path: '/' })
+    console.log("Language after a user change is "+!lang)
+
+    // Store in localStorage
+    localStorage.setItem("savedlang", !lang)
+    console.log("saveLang after a user change is "+!lang)
+  } 
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
@@ -263,7 +291,7 @@ function App() {
                 { user ? (
                   <Button onClick={() => auth.signOut()}>{lang ? "Déconnecter":"Logout"}</Button>
                 ) : (
-                  <Button onClick={() => toggleLang()}>{lang ? "EN":"FR"}</Button>
+                  <Button onClick={toggleLang}>{lang ? "EN":"FR"}</Button>
                 )
                 }
                 
