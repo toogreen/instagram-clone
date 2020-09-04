@@ -43,35 +43,24 @@ const useStyles = makeStyles((theme) => ({
 
 const Spinner = () => (
   <div className="post loading">
-    <h5>Loading...</h5>
+    <img alt='Loading...' src="https://i.gifer.com/ZZ5H.gif" width="20" /><h5>Loading...</h5>
   </div>
 );
 
-//let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)cookielang\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-let savedlangValue
-// Retrieve
-if (typeof(Storage) !== "undefined") {
-  
-// Store  
-savedlangValue = localStorage.getItem("savedlang");
-console.log("savedValue value is : "+savedlangValue)
-} else {
-  console.log("Sorry, your browser does not support Web Storage...");
-}
 
+/* const locale = () => {
 
-let browserValue = getUserLocale().includes("fr")
-console.log("browser value is "+browserValue)
+  const savedLang = localStorage.getItem("savedlang");
+  console.log("show browser lang "+savedLang)
+  const browserLang = getUserLocale().includes("fr")
+  console.log("show saved lang "+savedLang)
 
-
-function localeload(){
-  
-  if (savedlangValue !== null) {
-    return(savedlangValue)
+  if (savedLang) {
+    return(savedLang)
   } else {
-    return(browserValue)
+    return(browserLang)
   }
-}
+} */
 
 
 
@@ -92,21 +81,23 @@ function App() {
   const [viewwhichuser, setViewWhichUser] = useState('');
   const [viewsinglepost, setViewSinglePost] = useState(false);
   const [singlepostid, setSinglePostId] = useState('');
-  const [lang, setLang] = useState(localeload);
+  const [savedlanguage, setSavedLanguage] = useState(localStorage.getItem("savedlang"))
+  const [lang, setLang] = useState(getUserLocale().includes("fr"));
 
-  console.log("Language after loading const is "+lang)
+/*   useEffect(() =>{
+    
+    let curSaved = localStorage.getItem("savedlang")
+    let browserLang = getUserLocale().includes("fr")
 
-  
+    if (curSaved !== null) {
+      setLang(curSaved)
+    }
+    
+  }, []); */
 
-
-/*   console.log("right now cookielang = "+cookies.cookielang)
-
-  console.log("localeload value now is "+lang)
- */
 
   // This is to toggle from FR to EN and vice-versa
-  function toggleLang(){
-  
+  const toggleLang = () =>{
     setLang(!lang)
     //setCookie('cookielang', !lang, { path: '/' })
     console.log("Language after a user change is "+!lang)
@@ -114,7 +105,7 @@ function App() {
     // Store in localStorage
     localStorage.setItem("savedlang", !lang)
     console.log("saveLang after a user change is "+!lang)
-  } 
+  }
 
   // The below is what checks if you are logged in or not, and keeps you logged in on refresh
   useEffect(() => {
