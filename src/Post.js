@@ -7,7 +7,7 @@ import MenuPopupState from "./components/MenuPopupState";
 import Textarea from 'react-expanding-textarea';
 import Linkify from 'react-linkify';
 
-function Post({lang, postId, username, user, caption, imageUrl, imagename, viewwhichuser}) {
+function Post({lang, postId, username, user, caption, imageUrl, imagename, timestampa, viewwhichuser}) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState([]);
 
@@ -199,6 +199,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                                 </div>
                             } 
                         </div>
+                        {timestampa}
                     </div>
 
                    
