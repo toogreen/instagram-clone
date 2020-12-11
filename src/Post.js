@@ -81,11 +81,10 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
 
         // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
       
-        
         db.collection("posts")
         .doc(postId)
         .collection("comments")
-        .where("text", "==", commentToDel)
+        .where("timestamp", "==", commentToDel)
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
@@ -192,7 +191,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                                     {/* This is where the 3 dots menu appear to delete comments */}
                                     <MenuPopupState 
                                         lang={lang}
-                                        datatopass={comment.text}
+                                        datatopass={comment.timestamp}
                                         functiontopass={deleteComment}
                                         labeltopass={lang ? "Effacez ce commentaire":"Delete this comment"}
                                     />
