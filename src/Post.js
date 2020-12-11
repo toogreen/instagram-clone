@@ -80,7 +80,7 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
     function deleteComment(commentToDel) {
 
         // Spent a whole fucking night and most of an afternoon trying to figure this one out!!!!
-      
+    
         db.collection("posts")
         .doc(postId)
         .collection("comments")
@@ -179,8 +179,9 @@ function Post({lang, postId, username, user, caption, imageUrl, imagename, vieww
                             <Linkify componentDecorator={componentDecorator}>
                                 <strong onClick={viewtheirstuff.bind(this, comment.username)}>
                                     {comment.username}: 
-                                </strong> {comment.text} 
+                                </strong> {comment.text}
                             </Linkify>
+                            
                         </p>
                         <div className="delete__CommentButton" >
                             {

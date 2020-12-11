@@ -60,10 +60,6 @@ const locale =() => {
   }
 }
 
-
-
-console.log(locale);
-
 function App() {
 
   const classes = useStyles();
@@ -83,8 +79,6 @@ function App() {
   const [singlepostid, setSinglePostId] = useState('');
   const [lang, setLang] = useState(locale);
 
-  console.log(lang)
-
   // This is to toggle from FR to EN
   const toggleLang = () => setLang(!lang);
 
@@ -94,7 +88,6 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // if user has logged in...
-        console.log(authUser);
         setUser(authUser);
 
       } else {
